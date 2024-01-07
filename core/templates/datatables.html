@@ -1,0 +1,20 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+{% block content %}
+<div class="d-flex">
+    {% include "layouts/sidebar.html" %}
+    <div class="w-100">
+        
+        {% include "layouts/header.html" %}
+        <h1>DATA TABLES</h1>
+    <table id="myTable"></table>
+    
+
+    </div>
+
+</div>
+{% endblock content %}
+{% block scripts %}
+<script src="{% static '/assets/js/index.js' %}"></script>
+{% endblock scripts %} 
+

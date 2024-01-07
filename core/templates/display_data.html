@@ -1,0 +1,71 @@
+<!-- Ajoutez cette ligne au début du fichier pour charger les balises statiques -->
+{% load static %} 
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top 10 Weekly Rankings</title>
+
+    <!-- Ajouter votre propre style personnalisé -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/styles.css' %}">
+    
+    <!-- Intégrer Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-4">Top 10 Weekly Rankings</h1>
+
+        <!-- Ajouter une liste déroulante pour choisir le pays et la catégorie -->
+        <form method="post" action="{% url 'display_data' %}">
+            {% csrf_token %}
+            <div class="form-row align-items-center">
+                <div class="col-md-3 mb-2">
+                    <label for="selected_country">Choisir un pays :</label>
+                    <select class="form-control" name="selected_country" id="selected_country">
+                        {% for country in countries %}
+                            <option value="{{ country }}">{{ country }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-3 mb-2">
+                    <label for="selected_category">Choisir une catégorie :</label>
+                    <select class="form-control" name="selected_category" id="selected_category">
+                        <option value="Films">Films</option>
+                        <option value="TV">TV</option>
+                    </select>
+                </div>
+                <div class="col-md-2 mb-2">
+                    <button type="submit" class="btn btn-primary">Afficher Top 10</button>
+                </div>
+            </div>
+        </form>
+
+        <!-- Afficher les données dans un tableau avec Bootstrap -->
+        <table class="table table-bordered mt-4">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Show Title</th>
+                    <th scope="col">Weekly Rank</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for entry in data %}
+                    <tr>
+                        <td>{{ entry.show_title }}</td>
+                        <td>{{ entry.weekly_rank }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Intégrer Bootstrap JS et jQuery (optionnel, mais nécessaire pour certains composants Bootstrap) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #303030; /* Couleur de fond Netflix */
+            color: #FFFFFF; /* Couleur du texte Netflix */
+            text-align: center;
+        }
+
+        h1 {
+            color: #E50914; /* Rouge Netflix */
+        }
+
+        .chart-container {
+            width: 80%;
+            margin: auto;
+            background-color: #1f1f1f; /* Fond des conteneurs de graphiques Netflix */
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
