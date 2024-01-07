@@ -1,0 +1,83 @@
+<!-- dashboard.html -->
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netflix Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/bar.css' %}">
+    <!-- Inclure le lien vers Plotly.js -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+    <!-- <style>.tv-shows-count-container {
+        width: 200px; /* Adjust the width as needed */
+        margin: auto;
+        background-color: #1f1f1f; /* Fond des conteneurs de graphiques Netflix */
+        padding: 20px;
+        margin-top: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }</style> -->
+</head>
+<body>
+    <h1>Netflix Dashboard</h1>
+
+    <div class="chart-container-case">
+        <!-- logo netflix-->
+        <img src="{% static 'assets/css/logo.png' %}" alt="Netflix Logo" class="netflix-logo"  >
+    </div>
+
+    <div class="chart-container-case">
+        <!-- Afficher le nombre total de séries télévisées -->
+        <h2>Total TV Shows : </h2>
+        <h1>{{ total_tv_shows_count }}</h1>
+    </div>
+    
+    <div class="chart-container-case">
+        <!-- Afficher le nombre total de movies-->
+        <h2>Total Movies : </h2>
+        <h1>{{ total_movies_count }}</h1>
+    </div>
+
+    <div class="chart-container">
+        {{ age_rating_pie_chart | safe }}
+    </div>
+
+
+
+    <div class="chart-container">
+        <!-- Graphique interactif des séries télévisées -->
+        {{ plot_tv_shows|safe }}
+    </div>
+
+    <div class="chart-container">
+        <!-- Graphique interactif des films -->
+        {{ plot_movies|safe }}
+    </div>
+
+    <div class="chart-container">
+        <!-- Graphique secteur du pourcentage de TV Shows et Films -->
+        {{ plot_pie|safe }}
+    </div>
+
+    <div class="chart-container">
+        <!-- Word Cloud des titres Netflix -->
+        {{ wordcloud|safe }}
+    </div>
+
+    <div class="chart-container">
+        <!-- Graphique horizontal des pourcentages de TV Shows et Movies pour les top 10 pays -->
+        {{ plot_horizontal_top_countries|safe }}
+    </div>
+
+    
+
+    
+            
+
+</body>
+</html>

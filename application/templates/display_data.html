@@ -1,0 +1,72 @@
+{% load static %} 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top 10 Weekly Rankings</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/styles.css' %}">
+</head>
+<body class="bg-dark text-light">
+
+    <div class="container mt-5">
+        <h1 class="display-4 mb-4">Top 10 Weekly Rankings</h1>
+
+        <form method="post" action="{% url 'display_data' %}" class="mb-4">
+            {% csrf_token %}
+            <div class="form-row align-items-center">
+                <div class="col-md-3 mb-2">
+                    <label for="selected_country" class="text-light">Select a country :</label>
+                    <select class="form-control" name="selected_country" id="selected_country">
+                        {% for country in countries %}
+                            <option value="{{ country }}">{{ country }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-3 mb-2">
+                    <label for="selected_category" class="text-light">Select a category :</label>
+                    <select class="form-control" name="selected_category" id="selected_category">
+                        <option value="Films">Films</option>
+                        <option value="TV">TV</option>
+                    </select>
+                </div>
+                <div class="col-md-2 mb-2">
+                    <button type="submit" class="btn btn-danger btn-block" style="margin-top: 35px;">Top 10</button>
+                </div>
+            </div>
+        </form>
+
+        <div class="card bg-secondary text-white mb-3">
+            <div class="card-header">DECEMBER 18 - DECEMBER 24, 2023</div>
+            <div class="card-body">
+                <table class="table table-dark table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Title</th>
+                            <th scope="col">Weekly Rank</th>
+                            <th scope="col">cumulative weeks in top 10</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for entry in data %}
+                            <tr>
+                                <td>{{ entry.show_title }}</td>
+                                <td>{{ entry.weekly_rank }}</td>
+                                <td>{{ entry.cumulative_weeks_in_top_10 }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
